@@ -37,6 +37,11 @@ class FoodGallery {
 
             // Load image metadata
             const response = await fetch('images.json');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
             this.images = data.images.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -57,7 +62,19 @@ class FoodGallery {
 
         } catch (error) {
             console.error('Error loading images:', error);
-            this.gallery.innerHTML = '<p class="error">Failed to load images</p>';
+            this.gallery.innerHTML = `
+                <div style="padding: 2rem; text-align: center;">
+                    <p class="error" style="color: #d32f2f; font-size: 1.2rem; margin-bottom: 1rem;">
+                        ❌ 加载失败
+                    </p>
+                    <p style="color: #666; margin-bottom: 0.5rem;">
+                        错误信息: ${error.message}
+                    </p>
+                    <p style="color: #999; font-size: 0.9rem;">
+                        请检查浏览器控制台（F12）查看详细错误
+                    </p>
+                </div>
+            `;
             this.loading.style.display = 'none';
         }
     }
