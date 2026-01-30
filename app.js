@@ -20,6 +20,7 @@ class FoodGallery {
         this.closeBtn = document.querySelector('.close');
         this.prevBtn = document.getElementById('prev-btn');
         this.nextBtn = document.getElementById('next-btn');
+        this.countText = document.getElementById('count-text');
 
         // Zoom controls
         this.zoomSlider = document.getElementById('zoom-slider');
@@ -44,6 +45,9 @@ class FoodGallery {
 
             // Load ALL images at once
             this.loadAllImages();
+
+            // Update photo count display
+            this.updatePhotoCount();
 
             // Setup modal
             this.setupModal();
@@ -228,6 +232,11 @@ class FoodGallery {
     closeModal() {
         this.modal.classList.remove('show');
         document.body.style.overflow = 'auto';
+    }
+
+    updatePhotoCount() {
+        const count = this.images.length;
+        this.countText.textContent = `共 ${count} 张照片`;
     }
 }
 
