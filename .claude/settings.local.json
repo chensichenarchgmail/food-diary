@@ -16,7 +16,8 @@
       "Bash(do echo:*)",
       "Bash(break:*)",
       "Bash(done)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(git pull:*)"
     ]
   }
 }
