@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️Food Diary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Page Title -->
+    <div class="page-title">
+        <h1>🍽️Food Diary</h1>
+    </div>
+
+    <!-- Zoom Control -->
+    <div id="zoom-control" class="zoom-control">
+        <button id="zoom-out" class="zoom-btn">−</button>
+        <input type="range" id="zoom-slider" class="zoom-slider" min="50" max="300" value="150">
+        <button id="zoom-in" class="zoom-btn">+</button>
+    </div>
+
+    <main>
+        <div id="gallery" class="gallery">
+            <!-- Images will be loaded here dynamically -->
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>加载中...</p>
+        </div>
+    </main>
+
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <button class="nav-arrow prev" id="prev-btn">&lt;</button>
+        <button class="nav-arrow next" id="next-btn">&gt;</button>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h2 id="modal-date"></h2>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Food Diary &copy; 2026</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
