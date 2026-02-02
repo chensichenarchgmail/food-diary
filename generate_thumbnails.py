@@ -4,10 +4,10 @@ from PIL import Image
 import json
 
 # Paths
-source_dir = r"C:\Users\GF\OneDrive\Obsidian Vault\notes\food-images"
-target_dir = r"C:\Users\GF\OneDrive\Obsidian Vault\notes\food-website\food-images"
-thumbnail_dir = r"C:\Users\GF\OneDrive\Obsidian Vault\notes\food-website\food-images\thumbnails"
-images_json = r"C:\Users\GF\OneDrive\Obsidian Vault\notes\food-website\images.json"
+source_dir = os.path.join(".", "src-images")
+target_dir = os.path.join(".", "food-images")
+thumbnail_dir = os.path.join(".", "thumbnails")
+images_json = os.path.join(".", "images.json")
 
 # Thumbnail size (width, height)
 THUMBNAIL_SIZE = (300, 300)
