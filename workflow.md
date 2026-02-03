@@ -27,7 +27,7 @@
 ## 目录结构
 
 ```
-food-website/
+food-diary/
 ├── src-images/      # 新图片（临时存放）
 ├── food-images/     # 原始图片
 ├── thumbnails/      # 缩略图 (300x300)
