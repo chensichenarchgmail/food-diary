@@ -213,6 +213,10 @@ class FoodGallery {
     openModal(index) {
         this.currentModalIndex = index;
 
+        // Clear previous image first to prevent showing old image
+        this.modalImage.style.opacity = '0';
+        this.modalImage.src = '';
+
         // Calculate scrollbar width first (synchronously)
         const scrollWidth = window.innerWidth - document.documentElement.clientWidth;
 
@@ -239,6 +243,16 @@ class FoodGallery {
         // Load original image
         this.modalImage.src = thumbnail.dataset.originalSrc;
 
+        // Fade in image when loaded
+        this.modalImage.onload = () => {
+            this.modalImage.style.opacity = '1';
+        };
+
+        // If image already cached, show immediately
+        if (this.modalImage.complete) {
+            this.modalImage.style.opacity = '1';
+        }
+
         // Update button states
         this.prevBtn.disabled = (index === 0);
         this.nextBtn.disabled = (index === this.images.length - 1);
@@ -247,6 +261,8 @@ class FoodGallery {
     showPrevImage() {
         if (this.currentModalIndex > 0) {
             this.currentModalIndex--;
+            // Fade out before changing
+            this.modalImage.style.opacity = '0';
             this.showModalImage(this.currentModalIndex);
         }
     }
@@ -254,12 +270,19 @@ class FoodGallery {
     showNextImage() {
         if (this.currentModalIndex < this.images.length - 1) {
             this.currentModalIndex++;
+            // Fade out before changing
+            this.modalImage.style.opacity = '0';
             this.showModalImage(this.currentModalIndex);
         }
     }
 
     closeModal() {
         this.modal.classList.remove('show');
+        // Clear image to prevent showing it next time
+        setTimeout(() => {
+            this.modalImage.src = '';
+            this.modalImage.style.opacity = '0';
+        }, 200);
         // Restore body scroll and remove padding compensation
         document.body.style.overflow = 'auto';
         document.body.style.paddingRight = '0';
