@@ -212,9 +212,19 @@ class FoodGallery {
 
     openModal(index) {
         this.currentModalIndex = index;
+
+        // Calculate scrollbar width first (synchronously)
+        const scrollWidth = window.innerWidth - document.documentElement.clientWidth;
+
+        // Apply all style changes synchronously before showing modal
+        document.body.style.overflow = 'hidden';
+        if (scrollWidth > 0) {
+            document.body.style.paddingRight = `${scrollWidth}px`;
+        }
+
+        // Show modal immediately
         this.showModalImage(index);
         this.modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
     }
 
     showModalImage(index) {
@@ -222,10 +232,12 @@ class FoodGallery {
         const galleryItem = this.gallery.children[index];
         const thumbnail = galleryItem.querySelector('img');
 
-        // Load original image
-        this.modalImage.src = thumbnail.dataset.originalSrc;
+        // Set modal info immediately
         this.modalDate.textContent = img.date || '未知日期';
         this.modalDescription.textContent = img.description || '暂无描述';
+
+        // Load original image
+        this.modalImage.src = thumbnail.dataset.originalSrc;
 
         // Update button states
         this.prevBtn.disabled = (index === 0);
@@ -248,7 +260,9 @@ class FoodGallery {
 
     closeModal() {
         this.modal.classList.remove('show');
+        // Restore body scroll and remove padding compensation
         document.body.style.overflow = 'auto';
+        document.body.style.paddingRight = '0';
     }
 
     updatePhotoCount() {
